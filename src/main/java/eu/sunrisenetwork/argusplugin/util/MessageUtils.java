@@ -1,0 +1,12 @@
+package eu.sunrisenetwork.argusplugin.util;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+
+public class MessageUtils {
+    private static final String PREFIX = ChatColor.GRAY + "" + ChatColor.BOLD + "[" + ChatColor.RESET + ChatColor.RED + "ARGUS" + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET; //[ARGUS]
+
+    public static void sendMessage(CommandSender sender, String message) {
+        sender.sendMessage(PREFIX + ChatColor.GRAY + message);
+    }
+}

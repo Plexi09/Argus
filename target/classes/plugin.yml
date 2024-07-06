@@ -1,0 +1,88 @@
+name: ARGUS
+main: eu.sunrisenetwork.argusplugin.ARGUS
+version: 1.0
+api-version: 1.13
+commands:
+  spectate:
+    description: Puts the player in spectator mode and teleports to another player.
+    permission: argus.spectate
+    permission-message: You do not have permission to use this command.
+  openinv:
+    description: Opens a player's full inventory.
+    aliases: [oi, inv]
+    permission: argus.openinv
+    permission-message: You do not have permission to use this command.
+
+  openender:
+    description: Opens a player's ender chest.
+    aliases: [oe]
+    permission: argus.openender
+    permission-message: You do not have permission to use this command.
+
+  searchinv:
+    description: Lists all players with a certain item in their inventory.
+    permission: argus.searchinv
+    permission-message: You do not have permission to use this command.
+
+  searchender:  
+    description: Lists all players with a certain item in their ender chest.
+    permission: argus.searchender
+    permission-message: You do not have permission to use this command.
+
+  silentcontainer:
+    description: Enables or disables SilentContainer mode.
+    aliases: [sc, silentc, silentchest]
+    permission: argus.silentcontainer
+    permission-message: You do not have permission to use this command.
+
+  arrest:
+    description: Arrests a player with a given reason.
+    permission: argus.arrest
+    permission-message: You do not have permission to use this command.
+
+  topluck:
+    description: Show the luckyest players
+    permission: argus.topluck
+    permission-message: You do not have permission to use this command.
+
+  lookup:
+    description: Show info about a player
+    permission: argus.lookup
+    permission-message: You do not have permission to use this command.
+
+permissions:
+  argus.spectate:
+    description: Puts the player in spectator mode and teleports to another player.
+    default: op
+      
+  argus.openinv:
+    description: Opens a player's full inventory.
+    default: op
+      
+  argus.openender:
+    description: Opens a player's ender chest.
+    default: op
+      
+  argus.searchinv:
+    description: Lists all players with a certain item in their inventory.
+    default: op
+      
+  argus.searchender:
+    description: Lists all players with a certain item in their inventory.
+    default: op
+      
+  argus.silentcontainer:
+    description: Enables or disables SilentContainer mode.
+    default: op
+      
+  argus.arrest:
+    description: Arrests a player.
+    default: op
+      
+  argus.topluck:
+    description: Show the luckyest players
+    default: op
+      
+  argus.topluck.notify:
+    description: Show the luckyest players and get notifyed
+    default: op
