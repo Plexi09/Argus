@@ -47,7 +47,7 @@ public class InventoryManager {
     public static Inventory createPlayerActionsInventory(Player target) {
         Inventory inventory = Bukkit.createInventory(null, 36, "Actions pour " + target.getName());
 
-        ItemStack openInv = createItem(Material.CHEST, "§6Ouvrir l'inventaire", "§7Clic pour ouvrir l'inventaire de " + target.getName());
+        ItemStack openInv = createItem(Material.CHEST, "§6Open inventory", "§7Click to open" + target.getName() + "'s inventory.");
         ItemStack spectate = createItem(Material.ENDER_PEARL, "§6Observer", "§7Clic pour observer " + target.getName());
         ItemStack freeze = createItem(Material.ICE, "§6Geler", "§7Clic pour geler " + target.getName());
 
