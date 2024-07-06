@@ -48,8 +48,8 @@ public class InventoryManager {
         Inventory inventory = Bukkit.createInventory(null, 36, "Actions pour " + target.getName());
 
         ItemStack openInv = createItem(Material.CHEST, "§6Open inventory", "§7Click to open" + target.getName() + "'s inventory.");
-        ItemStack spectate = createItem(Material.ENDER_PEARL, "§6Observer", "§7Clic pour observer " + target.getName());
-        ItemStack freeze = createItem(Material.ICE, "§6Geler", "§7Clic pour geler " + target.getName());
+        ItemStack spectate = createItem(Material.ENDER_PEARL, "§6Spectate", "§7Click to spectate " + target.getName());
+        ItemStack freeze = createItem(Material.ICE, "§6Freeze", "§7Click to freeze " + target.getName());
 
         int diamondsMined = LuckCalculator.getDiamondsMined(target);
         Map<Player, Double> luckPercentages = LuckCalculator.calculateLuckPercentages();
