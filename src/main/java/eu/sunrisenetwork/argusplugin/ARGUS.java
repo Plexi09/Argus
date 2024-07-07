@@ -2,7 +2,6 @@ package eu.sunrisenetwork.argusplugin;
 
 import eu.sunrisenetwork.argusplugin.commands.*;
 import eu.sunrisenetwork.argusplugin.listeners.*;
-
 import eu.sunrisenetwork.argusplugin.tasks.DailyResetTask;
 import eu.sunrisenetwork.argusplugin.util.MessageUtils;
 import eu.sunrisenetwork.argusplugin.util.Reload;
@@ -28,8 +27,12 @@ public class ARGUS extends JavaPlugin {
         long startTime = System.nanoTime();  // Start time
 
         MessageUtils.sendMessage(getServer().getConsoleSender(), "Starting Argus...");
-        
+
+        if (debugEnabled) {
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Creating custom config...");
+        }
         createCustomConfig();
+        
         ARGUS.debugEnabled = this.getConfig().getBoolean("debug");
         ARGUS.spectateEnabled = this.getConfig().getBoolean("commands.spectate.enabled");
         ARGUS.topluckEnabled = this.getConfig().getBoolean("commands.topluck.enabled");
@@ -37,19 +40,18 @@ public class ARGUS extends JavaPlugin {
 
         if (debugEnabled) {
             MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Debug mode is enabled.");
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Spectate command enabled: " + spectateEnabled);
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Topluck command enabled: " + topluckEnabled);
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Topluck data reset interval: " + topluckDataResetInterval);
         }
 
         if (debugEnabled) {
             MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Registering commands...");
         }
 
-        if (spectateEnabled) {
-            this.getCommand("spectate").setExecutor(new CommandSpectate(this));
-        }
-
-        if (topluckEnabled) {
-            this.getCommand("topluck").setExecutor(new CommandTopLuck());
-        }
+        this.getCommand("spectate").setExecutor(new CommandSpectate(this));
+        
+        this.getCommand("topluck").setExecutor(new CommandTopLuck());
 
         this.getCommand("openinv").setExecutor(new CommandOpeninv(this));
         this.getCommand("oi").setExecutor(new CommandOpeninv(this));
@@ -78,15 +80,19 @@ public class ARGUS extends JavaPlugin {
         long duration = (endTime - startTime) / 1000000;  // Duration in milliseconds
 
         if (debugEnabled) {
-            MessageUtils.sendMessage(getServer().getConsoleSender(), "Finished loading in " + duration + " ms !");
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Finished loading in " + duration + " ms!");
         } else {
-            MessageUtils.sendMessage(getServer().getConsoleSender(), "Finished loading !");
+            MessageUtils.sendMessage(getServer().getConsoleSender(), "Finished loading!");
         }
-        MessageUtils.sendMessage(getServer().getConsoleSender(), "Thanks you for using Argus !");
+        
+        MessageUtils.sendMessage(getServer().getConsoleSender(), "Thank you for using Argus!");
 
         // Start the daily reset task if topluck is enabled
         if (topluckEnabled) {
             new DailyResetTask(this).start();
+            if (debugEnabled) {
+                MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Started DailyResetTask for Topluck.");
+            }
         }
     }
 
@@ -96,10 +102,22 @@ public class ARGUS extends JavaPlugin {
 
     public void reloadPlugin() {
         MessageUtils.sendMessage(getServer().getConsoleSender(), "Reloading Argus configuration...");
+        
+        if (debugEnabled) {
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Reloading configuration...");
+        }
+
         ARGUS.debugEnabled = this.getConfig().getBoolean("debug");
         ARGUS.spectateEnabled = this.getConfig().getBoolean("commands.spectate.enabled");
         ARGUS.topluckEnabled = this.getConfig().getBoolean("commands.topluck.enabled");
         ARGUS.topluckDataResetInterval = this.getConfig().getInt("commands.topluck.player-data-reset-interval", 864000); // Reload configuration
+
+        if (debugEnabled) {
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Debug mode is " + (debugEnabled ? "enabled" : "disabled"));
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Spectate command enabled: " + spectateEnabled);
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Topluck command enabled: " + topluckEnabled);
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Topluck data reset interval: " + topluckDataResetInterval);
+        }
     }
 
     private void createCustomConfig() {
@@ -115,10 +133,17 @@ public class ARGUS extends JavaPlugin {
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+
+        if (debugEnabled) {
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "Custom configuration loaded.");
+        }
     }
 
     @Override
     public void onDisable() {
         MessageUtils.sendMessage(getServer().getConsoleSender(), "Plugin disabled.");
+        if (debugEnabled) {
+            MessageUtils.sendDebugMessage(getServer().getConsoleSender(), "ARGUS plugin has been disabled.");
+        }
     }
 }
