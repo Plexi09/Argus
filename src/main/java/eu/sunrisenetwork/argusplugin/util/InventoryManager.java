@@ -45,7 +45,7 @@ public class InventoryManager {
     }
     
     public static Inventory createPlayerActionsInventory(Player target) {
-        Inventory inventory = Bukkit.createInventory(null, 36, "Actions pour " + target.getName());
+        Inventory inventory = Bukkit.createInventory(null, 36, "Actions for " + target.getName());
 
         ItemStack openInv = createItem(Material.CHEST, "§6Open inventory", "§7Click to open" + target.getName() + "'s inventory.");
         ItemStack spectate = createItem(Material.ENDER_PEARL, "§6Spectate", "§7Click to spectate " + target.getName());
@@ -54,9 +54,9 @@ public class InventoryManager {
         int diamondsMined = LuckCalculator.getDiamondsMined(target);
         Map<Player, Double> luckPercentages = LuckCalculator.calculateLuckPercentages();
         double luckPercentage = luckPercentages.getOrDefault(target, 0.0);
-        ItemStack diamonds = createItem(Material.DIAMOND_ORE, "§bDiamants minés: " + diamondsMined, "§7Chance: §a" + String.format("%.2f", luckPercentage) + "%");
+        ItemStack diamonds = createItem(Material.DIAMOND_ORE, "§bDiamonds mined: " + diamondsMined, "§7Luck: §a" + String.format("%.2f", luckPercentage) + "%");
 
-        ItemStack back = createItem(Material.BARRIER, "§cRetour", "§7Clic pour revenir au Top Luck");
+        ItemStack back = createItem(Material.BARRIER, "§cBack", "§7Click to go back to the Top Luck menue");
 
         inventory.setItem(11, openInv);
         inventory.setItem(13, spectate);
