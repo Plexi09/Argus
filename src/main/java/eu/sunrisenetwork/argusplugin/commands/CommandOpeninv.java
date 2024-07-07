@@ -1,5 +1,6 @@
 package eu.sunrisenetwork.argusplugin.commands;
 
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -8,10 +9,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import eu.sunrisenetwork.argusplugin.ARGUS;
 import eu.sunrisenetwork.argusplugin.listeners.InventoryClickListener;
 import eu.sunrisenetwork.argusplugin.util.MessageUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandOpeninv implements CommandExecutor {
     private final JavaPlugin plugin;
@@ -45,12 +50,12 @@ public class CommandOpeninv implements CommandExecutor {
         
         // Check if the target player is online
         if (target == null || !target.isOnline()) {
-            MessageUtils.sendMessage(player, args[0] + "is not online.");
+            MessageUtils.sendMessage(player, args[0] + " is not online.");
             return true;
         }
         
-        // Create a custom inventory with a size of 45 slots (36 for inventory + 4 for armor + 1 for off-hand + 4 extra)
-        Inventory customInventory = Bukkit.createInventory(null, 45, target.getName() + "'s Inventory");
+        // Create a custom inventory with a size of 54 slots (45 for inventory + 4 for armor + 1 for off-hand + 4 extra)
+        Inventory customInventory = Bukkit.createInventory(null, 54, target.getName() + "'s Inventory");
         
         // Copy the target player's inventory to the custom inventory
         ItemStack[] targetContents = target.getInventory().getContents();
@@ -58,14 +63,22 @@ public class CommandOpeninv implements CommandExecutor {
             customInventory.setItem(i, targetContents[i]);
         }
         
-        // Copy the target player's armor to the custom inventory (slots 36 to 39)
+        // Copy the target player's armor to the custom inventory (slots 45 to 48)
         ItemStack[] armorContents = target.getInventory().getArmorContents();
         for (int i = 0; i < armorContents.length; i++) {
-            customInventory.setItem(36 + i, armorContents[i]);
+            customInventory.setItem(45 + i, armorContents[i]);
         }
         
-        // Copy the target player's off-hand item to the custom inventory (slot 40)
-        customInventory.setItem(40, target.getInventory().getItemInOffHand());
+        // Copy the target player's off-hand item to the custom inventory (slot 49)
+        customInventory.setItem(49, target.getInventory().getItemInOffHand());
+        
+        // Create the control buttons and add them to the last row
+        customInventory.setItem(45, createStatsItem(Material.COOKED_BEEF, "§aFood: " + target.getFoodLevel()));
+        customInventory.setItem(46, createStatsItem(Material.TOTEM_OF_UNDYING, "§cHealth: " + target.getHealth()));
+        
+        customInventory.setItem(51, createControlItem(Material.STRUCTURE_VOID, "§cClear Inventory", "§7Click to clear the player's inventory."));
+        customInventory.setItem(52, createControlItem(Material.DISPENSER, "§eShuffle Inventory", "§7Click to shuffle the player's inventory."));
+        customInventory.setItem(53, createControlItem(Material.ARROW, "§aRefresh", "§7Click to refresh the inventory view."));
         
         // Add the inventory and target player to the map in InventoryClickListener
         InventoryClickListener.inventories.put(customInventory, target);
@@ -76,5 +89,35 @@ public class CommandOpeninv implements CommandExecutor {
         MessageUtils.sendMessage(player, "Opened inventory of " + target.getName() + ".");
         
         return true;
+    }
+    
+    private ItemStack createControlItem(Material material, String name, String... lore) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        
+        List<String> loreList = new ArrayList<>();
+        for (String line : lore) {
+            loreList.add(line);
+        }
+        meta.setLore(loreList);
+        
+        item.setItemMeta(meta);
+        return item;
+    }
+    
+    private ItemStack createStatsItem(Material material, String name, String... lore) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        
+        List<String> loreList = new ArrayList<>();
+        for (String line : lore) {
+            loreList.add(line);
+        }
+        meta.setLore(loreList);
+        
+        item.setItemMeta(meta);
+        return item;
     }
 }

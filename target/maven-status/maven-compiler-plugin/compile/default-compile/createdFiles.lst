@@ -2,6 +2,7 @@ eu\sunrisenetwork\argusplugin\commands\CommandArrest.class
 eu\sunrisenetwork\argusplugin\data\PlayerData.class
 eu\sunrisenetwork\argusplugin\ARGUS.class
 eu\sunrisenetwork\argusplugin\commands\CommandSearchinv.class
+eu\sunrisenetwork\argusplugin\listeners\InventoryClickListener$1.class
 eu\sunrisenetwork\argusplugin\util\Reload.class
 eu\sunrisenetwork\argusplugin\commands\CommandSilentcontainer.class
 eu\sunrisenetwork\argusplugin\commands\CommandTopLuck.class
