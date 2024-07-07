@@ -45,7 +45,7 @@ public class CommandOpeninv implements CommandExecutor {
         
         // Check if the target player is online
         if (target == null || !target.isOnline()) {
-            MessageUtils.sendMessage(player, "Player not found or not online.");
+            MessageUtils.sendMessage(player, args[0] + "is not online.");
             return true;
         }
         
@@ -73,7 +73,7 @@ public class CommandOpeninv implements CommandExecutor {
         // Open the custom inventory for the player
         player.openInventory(customInventory);
         
-        MessageUtils.sendMessage(player, "Opened inventory of " + target.getName());
+        MessageUtils.sendMessage(player, "Opened inventory of " + target.getName() + ".");
         
         return true;
     }

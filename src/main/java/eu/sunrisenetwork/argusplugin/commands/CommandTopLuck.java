@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import eu.sunrisenetwork.argusplugin.data.LuckCalculator;
-import eu.sunrisenetwork.argusplugin.util.InventoryManager;
+import eu.sunrisenetwork.argusplugin.util.TopluckInventoryManager;
 import eu.sunrisenetwork.argusplugin.util.MessageUtils;
 
 public class CommandTopLuck implements CommandExecutor {
@@ -20,7 +20,7 @@ public class CommandTopLuck implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        MessageUtils.sendDebugMessage(sender, "Executing /topluck command.");
+    	MessageUtils.sendDebugMessage(plugin.getServer().getConsoleSender(),("Executing /topluck command."));
 
         if (!(sender instanceof Player)) {
             sender.sendMessage("Only players can use this command.");
@@ -32,22 +32,15 @@ public class CommandTopLuck implements CommandExecutor {
         MessageUtils.sendDebugMessage(sender, "Command sender is player: " + player.getName());
         
         if (args.length > 0 && args[0].equalsIgnoreCase("reset")) {
-        	MessageUtils.sendDebugMessage(plugin.getServer().getConsoleSender(), ("Reset argument detected."));
-            if (!player.hasPermission("argus.topluck.reset")) {
-                player.sendMessage("You do not have permission to use this command.");
-                MessageUtils.sendDebugMessage(plugin.getServer().getConsoleSender(), ("Player lacks permission to reset stats."));
-                return true;
-            }
             
             LuckCalculator.resetStats();
             player.sendMessage("Player stats reset successfully.");
-            MessageUtils.sendDebugMessage(plugin.getServer().getConsoleSender(), ( "Player stats reset successfully."));
+            MessageUtils.sendMessage(plugin.getServer().getConsoleSender(), ( "Topluck: Player stats reset successfully."));
             return true;
         }
         
-        Inventory topLuckInventory = InventoryManager.createTopLuckInventory();
+        Inventory topLuckInventory = TopluckInventoryManager.createTopLuckInventory();
         player.openInventory(topLuckInventory);
-        MessageUtils.sendDebugMessage(plugin.getServer().getConsoleSender(), ("Opened Top Luck inventory for player: " + player.getName()));
         
         return true;
     }

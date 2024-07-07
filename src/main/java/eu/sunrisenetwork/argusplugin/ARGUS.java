@@ -108,8 +108,8 @@ public class ARGUS extends JavaPlugin {
         }
 
         ARGUS.debugEnabled = this.getConfig().getBoolean("debug");
-        ARGUS.spectateEnabled = this.getConfig().getBoolean("commands.spectate.enabled");
-        ARGUS.topluckEnabled = this.getConfig().getBoolean("commands.topluck.enabled");
+        ARGUS.spectateEnabled = this.getConfig().getBoolean("commands.spectate.enabled", true);
+        ARGUS.topluckEnabled = this.getConfig().getBoolean("commands.topluck.enabled",true );
         ARGUS.topluckDataResetInterval = this.getConfig().getInt("commands.topluck.player-data-reset-interval", 864000); // Reload configuration
 
         if (debugEnabled) {
