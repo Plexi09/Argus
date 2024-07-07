@@ -1,4 +1,4 @@
-package eu.sunrisenetwork.argusplugin.util;
+package eu.sunrisenetwork.argusplugin.data;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;

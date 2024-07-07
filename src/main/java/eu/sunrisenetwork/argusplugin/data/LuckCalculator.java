@@ -1,4 +1,4 @@
-package eu.sunrisenetwork.argusplugin.util;
+package eu.sunrisenetwork.argusplugin.data;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -48,7 +48,7 @@ public class LuckCalculator {
         return lastDeepslateDiamondMined.getOrDefault(player.getUniqueId(), 0);
     }
 
-    public static void resetDailyStats() {
+    public static void resetStats() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             UUID uuid = player.getUniqueId();
             lastStoneMined.put(uuid, getStatistic(player, Statistic.MINE_BLOCK, Material.STONE));
@@ -56,6 +56,14 @@ public class LuckCalculator {
             lastDeepslateDiamondMined.put(uuid, getStatistic(player, Statistic.MINE_BLOCK, Material.DEEPSLATE_DIAMOND_ORE));
             dailyDiamondsMined.put(uuid, 0);
         }
+    }
+
+    public static void resetPlayerStats(Player player) {
+        UUID uuid = player.getUniqueId();
+        lastStoneMined.put(uuid, getStatistic(player, Statistic.MINE_BLOCK, Material.STONE));
+        lastDiamondMined.put(uuid, getStatistic(player, Statistic.MINE_BLOCK, Material.DIAMOND_ORE));
+        lastDeepslateDiamondMined.put(uuid, getStatistic(player, Statistic.MINE_BLOCK, Material.DEEPSLATE_DIAMOND_ORE));
+        dailyDiamondsMined.put(uuid, 0);
     }
 
     private static int getStatistic(Player player, Statistic statistic, Material material) {

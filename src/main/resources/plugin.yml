@@ -50,7 +50,16 @@ commands:
     permission: argus.lookup
     permission-message: You do not have permission to use this command.
 
+  argusreload:
+    description: Reloads the plugin
+    permission: argus.reload
+    permission-message: You do not have permission to use this command.
+
 permissions:
+  argus.reload:
+    description: Reloads the plugin
+    default: op
+
   argus.spectate:
     description: Puts the player in spectator mode and teleports to another player.
     default: op
@@ -85,4 +94,8 @@ permissions:
       
   argus.topluck.notify:
     description: Show the luckyest players and get notifyed
+    default: op
+
+  argus.topluck.reset:
+    description: Force the reset of the topluck
     default: op

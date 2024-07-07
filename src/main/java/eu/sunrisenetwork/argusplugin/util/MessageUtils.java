@@ -9,4 +9,8 @@ public class MessageUtils {
     public static void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(PREFIX + ChatColor.GRAY + message);
     }
+    
+    public static void sendDebugMessage(CommandSender sender, String message) {
+        sender.sendMessage(PREFIX + ChatColor.YELLOW + "DEBUG: " + ChatColor.GRAY + message);
+    }
 }

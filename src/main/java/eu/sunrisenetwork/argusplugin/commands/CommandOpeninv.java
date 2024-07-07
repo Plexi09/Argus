@@ -1,5 +1,6 @@
 package eu.sunrisenetwork.argusplugin.commands;
 
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,10 +8,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import eu.sunrisenetwork.argusplugin.util.MessageUtils;
+
+import eu.sunrisenetwork.argusplugin.ARGUS;
 import eu.sunrisenetwork.argusplugin.listeners.InventoryClickListener;
+import eu.sunrisenetwork.argusplugin.util.MessageUtils;
 
 public class CommandOpeninv implements CommandExecutor {
+    private final JavaPlugin plugin;
+
+    public CommandOpeninv(JavaPlugin plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Check if the sender is a player
@@ -25,6 +34,9 @@ public class CommandOpeninv implements CommandExecutor {
         // Check if the command has exactly one argument (player name)
         if (args.length != 1) {
             MessageUtils.sendMessage(sender, "Usage: /openinv <player>");
+            if (ARGUS.debugEnabled) {
+                MessageUtils.sendMessage(plugin.getServer().getConsoleSender(), sender + " failed to use command /openinv: Incorrect usage");
+            }
             return true;
         }
         

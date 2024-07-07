@@ -1,1 +1,9 @@
-debug: true
+commands:
+  spectate: 
+    enabled: true
+  topluck:
+    enabled: true
+    player-data-reset-interval: 864000 #In ticks. Default: 864000 = 12h
+  
+
+debug: false
