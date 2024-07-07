@@ -1,9 +1,5 @@
 package eu.sunrisenetwork.argusplugin;
 
-import eu.sunrisenetwork.argusplugin.commands.*;
-import eu.sunrisenetwork.argusplugin.util.MessageUtils;
-import eu.sunrisenetwork.argusplugin.listeners.TopLuckInventoryListener;
-import eu.sunrisenetwork.argusplugin.listeners.InventoryClickListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,16 +10,28 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import eu.sunrisenetwork.argusplugin.commands.*;
+import eu.sunrisenetwork.argusplugin.listeners.*;
+import eu.sunrisenetwork.argusplugin.util.MessageUtils;
+
 public class ARGUS extends JavaPlugin {
     private File customConfigFile;
     private FileConfiguration customConfig;
-    private boolean debug;
 
     @Override
     public void onEnable() {
         long startTime = System.nanoTime();  // Start time
 
         MessageUtils.sendMessage(getServer().getConsoleSender(), "Starting Argus...");
+        
+        MessageUtils.sendMessage(getServer().getConsoleSender(), "Loading the config... ");
+        createCustomConfig();
+        Boolean debug = this.getConfig().getBoolean("debug");
+
+        if (debug) {
+        	MessageUtils.sendMessage(getServer().getConsoleSender(),"Debug mode is enabled.");
+        }
+        
         MessageUtils.sendMessage(getServer().getConsoleSender(), "Registering commands... ");
 
         this.getCommand("spectate").setExecutor(new CommandSpectate());
@@ -53,14 +61,6 @@ public class ARGUS extends JavaPlugin {
         MessageUtils.sendMessage(getServer().getConsoleSender(), "Loading listeners... ");
         getServer().getPluginManager().registerEvents(new TopLuckInventoryListener(), this);
 
-        MessageUtils.sendMessage(getServer().getConsoleSender(), "Loading the config... ");
-        createCustomConfig();
-        Boolean time = ARGUS.getConfig().getBoolean("debug");	
-
-        if (debug) {
-        	MessageUtils.sendMessage(getServer().getConsoleSender(),"Debug mode is enabled.");
-        }
-
         long endTime = System.nanoTime();  // End time
         long duration = (endTime - startTime) / 1000000;  // Duration in milliseconds
 
@@ -73,10 +73,11 @@ public class ARGUS extends JavaPlugin {
     }
 
     private void createCustomConfig() {
-        customConfigFile = new File(getDataFolder(), "custom.yml");
+        customConfigFile = new File(getDataFolder(), "config.yml");
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
-            saveResource("custom.yml", false);
+            MessageUtils.sendMessage(getServer().getConsoleSender(), "Creating the config file..." );
+            saveResource("config.yml", false);
          }
 
         customConfig = new YamlConfiguration();
