@@ -2,6 +2,7 @@ package eu.sunrisenetwork.argusplugin.commands;
 
 import eu.sunrisenetwork.argusplugin.ARGUS;
 import eu.sunrisenetwork.argusplugin.util.MessageUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

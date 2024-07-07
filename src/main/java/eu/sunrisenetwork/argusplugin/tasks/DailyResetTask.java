@@ -2,6 +2,7 @@ package eu.sunrisenetwork.argusplugin.tasks;
 
 import eu.sunrisenetwork.argusplugin.ARGUS;
 import eu.sunrisenetwork.argusplugin.data.LuckCalculator;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;

@@ -51,7 +51,7 @@ public class ARGUS extends JavaPlugin {
 
         this.getCommand("spectate").setExecutor(new CommandSpectate(this));
         
-        this.getCommand("topluck").setExecutor(new CommandTopLuck());
+        this.getCommand("topluck").setExecutor(new CommandTopLuck(this));
 
         this.getCommand("openinv").setExecutor(new CommandOpeninv(this));
         this.getCommand("oi").setExecutor(new CommandOpeninv(this));
