@@ -53,7 +53,7 @@ public class TopLuckInventoryListener implements Listener {
                                 clicker.openInventory(TopluckInventoryManager.createTopLuckInventory());
                                 break;
                             case ANVIL:
-                            	clicker.performCommand("arrest " + target.getName());
+                            	clicker.performCommand("arrest " + target.getName() + " You got caught !");
                             default:
                                 break;
                         }
