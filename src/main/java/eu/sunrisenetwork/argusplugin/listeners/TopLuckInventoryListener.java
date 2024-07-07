@@ -12,49 +12,51 @@ import org.bukkit.inventory.meta.SkullMeta;
 import eu.sunrisenetwork.argusplugin.util.TopluckInventoryManager;
 
 public class TopLuckInventoryListener implements Listener {
-    
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals("Top Luck") || event.getView().getTitle().startsWith("Actions pour ")) {
+        if (event.getView().getTitle().equals("Top Luck") || event.getView().getTitle().startsWith("Actions for ")) {
             event.setCancelled(true);
 
-            if (event.getView().getTitle().equals("Top Luck")) {
-                ItemStack clickedItem = event.getCurrentItem();
-                if (clickedItem != null && clickedItem.getType() == Material.PLAYER_HEAD) {
-                    SkullMeta meta = (SkullMeta) clickedItem.getItemMeta();
-                    Player target = Bukkit.getPlayer(meta.getOwningPlayer().getUniqueId());
-                    
-                    if (target != null) {
-                        Player clicker = (Player) event.getWhoClicked();
-                        clicker.openInventory(TopluckInventoryManager.createPlayerActionsInventory(target));
-                    }
-                }
-            } else if (event.getView().getTitle().startsWith("Actions pour ")) {
-                Player clicker = (Player) event.getWhoClicked();
-                String targetName = event.getView().getTitle().substring("Actions pour ".length());
-                Player target = Bukkit.getPlayer(targetName);
-                
-                ItemStack clickedItem = event.getCurrentItem();
-                if (clickedItem != null && target != null) {
+            Player clicker = (Player) event.getWhoClicked();
+            ItemStack clickedItem = event.getCurrentItem();
 
-                    switch (clickedItem.getType()) {
-                        case CHEST:
-                        	clicker.closeInventory();
-                            clicker.performCommand("openinv " + target.getName());
-                            break;
-                        case ENDER_PEARL:
-                            clicker.closeInventory();
-                            clicker.performCommand("spectate " + target.getName());
-                            break;
-                        case ICE:
-                            clicker.closeInventory();
-                            clicker.performCommand("freeze " + target.getName());
-                            break;
-                        case BARRIER:
-                            clicker.openInventory(TopluckInventoryManager.createTopLuckInventory());
-                            break;
-                        default:
-                            break;
+            if (clickedItem != null) {
+                if (event.getView().getTitle().equals("Top Luck")) {
+                    if (clickedItem.getType() == Material.PLAYER_HEAD) {
+                        SkullMeta meta = (SkullMeta) clickedItem.getItemMeta();
+                        Player target = Bukkit.getPlayer(meta.getOwningPlayer().getUniqueId());
+
+                        if (target != null) {
+                            clicker.openInventory(TopluckInventoryManager.createPlayerActionsInventory(target));
+                        }
+                    }
+                } else if (event.getView().getTitle().startsWith("Actions for ")) {
+                    String targetName = event.getView().getTitle().substring("Actions for ".length());
+                    Player target = Bukkit.getPlayer(targetName);
+
+                    if (target != null) {
+                        switch (clickedItem.getType()) {
+                            case CHEST:
+                                clicker.closeInventory();
+                                clicker.performCommand("openinv " + target.getName());
+                                break;
+                            case ENDER_PEARL:
+                                clicker.closeInventory();
+                                clicker.performCommand("spectate " + target.getName());
+                                break;
+                            case ICE:
+                                clicker.closeInventory();
+                                clicker.performCommand("freeze " + target.getName());
+                                break;
+                            case BARRIER:
+                                clicker.openInventory(TopluckInventoryManager.createTopLuckInventory());
+                                break;
+                            case ANVIL:
+                            	clicker.performCommand("arrest " + target.getName());
+                            default:
+                                break;
+                        }
                     }
                 }
             }

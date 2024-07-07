@@ -70,4 +70,8 @@ public class LuckCalculator {
         return player.getStatistic(statistic, material);
     }
 
+    public static int getTotalDiamondsMined(Player player) {
+        return getStatistic(player, Statistic.MINE_BLOCK, Material.DIAMOND_ORE) +
+               getStatistic(player, Statistic.MINE_BLOCK, Material.DEEPSLATE_DIAMOND_ORE);
+    }
 }

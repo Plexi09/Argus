@@ -37,7 +37,7 @@ public class TopluckInventoryManager {
             meta.setDisplayName("§6" + player.getName());
             
             List<String> lore = new ArrayList<>();
-            lore.add("§7Chance: §a" + String.format("%.2f", luckPercentage) + "%");
+            lore.add("§7Luck: §a" + String.format("%.2f", luckPercentage) + "%");
             meta.setLore(lore);
             
             skull.setItemMeta(meta);
@@ -50,20 +50,22 @@ public class TopluckInventoryManager {
     public static Inventory createPlayerActionsInventory(Player target) {
         Inventory inventory = Bukkit.createInventory(null, 36, "Actions for " + target.getName());
 
-        ItemStack openInv = createItem(Material.CHEST, "§6Open inventory", "§7Click to open" + target.getName() + "'s inventory.");
+        ItemStack openInv = createItem(Material.CHEST, "§6Open inventory", "§7Click to open " + target.getName() + "'s inventory.");
         ItemStack spectate = createItem(Material.ENDER_PEARL, "§6Spectate", "§7Click to spectate " + target.getName());
         ItemStack freeze = createItem(Material.ICE, "§6Freeze", "§7Click to freeze " + target.getName());
-
-        int diamondsMined = LuckCalculator.getDiamondsMined(target);
+        ItemStack arrest = createItem(Material.ANVIL, "§6Arrest","§7Click to arrest " + target.getName());
+        
+        int totalDiamondsMined = LuckCalculator.getTotalDiamondsMined(target);
         Map<Player, Double> luckPercentages = LuckCalculator.calculateLuckPercentages();
         double luckPercentage = luckPercentages.getOrDefault(target, 0.0);
-        ItemStack diamonds = createItem(Material.DIAMOND_ORE, "§bDiamonds mined: " + diamondsMined, "§7Luck: §a" + String.format("%.2f", luckPercentage) + "%");
+        ItemStack diamonds = createItem(Material.DIAMOND_ORE, "§bTotal diamonds mined: " + totalDiamondsMined, "§7Luck: §a" + String.format("%.2f", luckPercentage) + "%");
 
         ItemStack back = createItem(Material.BARRIER, "§cBack", "§7Click to go back to the Top Luck menue");
 
-        inventory.setItem(11, openInv);
-        inventory.setItem(13, spectate);
-        inventory.setItem(15, freeze);
+        inventory.setItem(10, openInv);
+        inventory.setItem(12, spectate);
+        inventory.setItem(14, freeze);
+        inventory.setItem(16, arrest);
         inventory.setItem(30, diamonds);
         inventory.setItem(32, back);
 
