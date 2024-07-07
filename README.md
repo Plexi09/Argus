@@ -99,6 +99,8 @@ We are continually working to improve Argus. Upcoming features include:
 
 We welcome contributions from the community! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request on our [GitHub repository](#).
 
+You can compile with this Maven goal: `mvn clean package`
+
 ---
 
 **Stay vigilant, moderators!** With Argus, maintaining a fair and enjoyable game environment on the Sunrise Network has never been easier.
