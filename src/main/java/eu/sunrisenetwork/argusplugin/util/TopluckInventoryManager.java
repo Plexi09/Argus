@@ -59,7 +59,6 @@ public class TopluckInventoryManager {
         Map<Player, Double> luckPercentages = LuckCalculator.calculateLuckPercentages();
         double luckPercentage = luckPercentages.getOrDefault(target, 0.0);
         ItemStack diamonds = createItem(Material.DIAMOND_ORE, "§bTotal diamonds mined: " + totalDiamondsMined, "§7Luck: §a" + String.format("%.2f", luckPercentage) + "%");
-
         ItemStack back = createItem(Material.BARRIER, "§cBack", "§7Click to go back to the Top Luck menue");
 
         inventory.setItem(10, openInv);

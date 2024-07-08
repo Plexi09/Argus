@@ -5,6 +5,7 @@ import eu.sunrisenetwork.argusplugin.listeners.*;
 import eu.sunrisenetwork.argusplugin.tasks.DailyResetTask;
 import eu.sunrisenetwork.argusplugin.util.MessageUtils;
 import eu.sunrisenetwork.argusplugin.util.Reload;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -50,6 +51,8 @@ public class ARGUS extends JavaPlugin {
         }
 
         this.getCommand("spectate").setExecutor(new CommandSpectate(this));
+        
+        this.getCommand("sethealth").setExecutor(new CommandSetHealth());
         
         this.getCommand("topluck").setExecutor(new CommandTopLuck(this));
 

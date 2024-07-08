@@ -13,4 +13,5 @@ public class MessageUtils {
     public static void sendDebugMessage(CommandSender sender, String message) {
         sender.sendMessage(PREFIX + ChatColor.YELLOW + "DEBUG: " + ChatColor.GRAY + message);
     }
+    
 }

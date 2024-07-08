@@ -1,7 +1,5 @@
 package eu.sunrisenetwork.argusplugin.listeners;
 
-import eu.sunrisenetwork.argusplugin.util.MessageUtils;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -10,6 +8,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import eu.sunrisenetwork.argusplugin.util.MessageUtils;
+
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -65,7 +66,7 @@ public class InventoryClickListener implements Listener {
             }
         }
     }
-    
+
     private void shuffleInventory(Player player) {
         ItemStack[] contents = player.getInventory().getContents();
         for (int i = 0; i < contents.length; i++) {
@@ -90,11 +91,9 @@ public class InventoryClickListener implements Listener {
             customInventory.setItem(45 + i, armorContents[i]);
         }
         
-        // Ajouter les items de stats aux emplacements 45 et 46
         customInventory.setItem(45, createStatsItem(Material.COOKED_BEEF, "§aFood: " + target.getFoodLevel()));
         customInventory.setItem(46, createStatsItem(Material.TOTEM_OF_UNDYING, "§cHealth: " + target.getHealth()));
         
-        // Ajouter les boutons de contrôle aux emplacements 51 à 53
         customInventory.setItem(51, createControlItem(Material.STRUCTURE_VOID, "§cClear Inventory", "§7Click to clear the player's inventory."));
         customInventory.setItem(52, createControlItem(Material.DISPENSER, "§eShuffle Inventory", "§7Click to shuffle the player's inventory."));
         customInventory.setItem(53, createControlItem(Material.ARROW, "§aRefresh", "§7Click to refresh the inventory view."));

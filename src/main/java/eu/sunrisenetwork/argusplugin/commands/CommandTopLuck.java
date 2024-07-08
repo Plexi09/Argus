@@ -8,8 +8,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import eu.sunrisenetwork.argusplugin.data.LuckCalculator;
-import eu.sunrisenetwork.argusplugin.util.TopluckInventoryManager;
 import eu.sunrisenetwork.argusplugin.util.MessageUtils;
+import eu.sunrisenetwork.argusplugin.util.TopluckInventoryManager;
 
 public class CommandTopLuck implements CommandExecutor {
     private final JavaPlugin plugin;

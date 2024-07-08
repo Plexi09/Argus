@@ -55,6 +55,11 @@ commands:
     permission: argus.reload
     permission-message: You do not have permission to use this command.
 
+  sethealth:
+    description: Set the health of a player
+    permission: argus.sethealth
+    permission-message: You do not have permission to use this command.
+
 permissions:
   argus.reload:
     description: Reloads the plugin
@@ -99,3 +104,8 @@ permissions:
   argus.topluck.reset:
     description: Force the reset of the topluck
     default: op
+
+  argus.sethealth:
+    description: Set the health of a player
+    default: op
+    
