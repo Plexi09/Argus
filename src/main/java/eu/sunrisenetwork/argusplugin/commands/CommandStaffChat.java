@@ -17,33 +17,28 @@ public class CommandStaffChat implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player)) {
-            MessageUtils.sendMessage(sender, "Only players can use this command.");
-            return true;
-        }
-
+        /**if (!(sender instanceof Player)) {
+        *    MessageUtils.sendMessage(sender, "Only players can use this command.");
+        *    return true;
+        *}
+		*/
         Player player = (Player) sender;
-
-        if (!player.hasPermission("argus.staffchat.speak")) {
-            MessageUtils.sendMessage(player, "You don't have permission to speak in the staff chat.");
-            return true;
-        }
 
         if (args.length == 0) {
             MessageUtils.sendMessage(player, "Usage: /sc <message>");
             return true;
         }
 
-        // Construire le message à envoyer dans le staff chat
         StringBuilder message = new StringBuilder();
         for (String arg : args) {
             message.append(arg).append(" ");
         }
 
-        // Envoyer le message aux joueurs ayant la permission de lire le staff chat
+        String finalMessage = message.toString().trim();
+
         for (Player onlineStaff : plugin.getServer().getOnlinePlayers()) {
             if (onlineStaff.hasPermission("argus.staffchat.read")) {
-                MessageUtils.sendStaffMessage(onlineStaff, message.toString());
+                MessageUtils.sendStaffMessage(onlineStaff, player.getName(), finalMessage);
             }
         }
 

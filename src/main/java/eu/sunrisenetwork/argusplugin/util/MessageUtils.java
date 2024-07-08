@@ -18,7 +18,7 @@ public class MessageUtils {
         sender.sendMessage(PREFIX + ChatColor.RED + "ERROR: " + ChatColor.GRAY + message);
     }
     
-    public static void sendStaffMessage(CommandSender sender, String message) {
-        sender.sendMessage(PREFIX + ChatColor.BLUE + "STAFF CHAT: " + ChatColor.GRAY + sender + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + message);
+    public static void sendStaffMessage(CommandSender recipient, String senderName, String message) {
+        recipient.sendMessage(ChatColor.BLUE + "[STAFF CHAT] " + ChatColor.GRAY + senderName + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + message);
     }
 }
