@@ -70,12 +70,16 @@ public class ARGUS extends JavaPlugin {
         this.getCommand("searchender").setExecutor(new CommandSearchender());
 
         this.getCommand("silentcontainer").setExecutor(new CommandSilentcontainer());
-        this.getCommand("sc").setExecutor(new CommandSilentcontainer());
         this.getCommand("silentc").setExecutor(new CommandSilentcontainer());
         this.getCommand("silentchest").setExecutor(new CommandSilentcontainer());
 
         this.getCommand("arrest").setExecutor(new CommandArrest(this));
         this.getCommand("argusreload").setExecutor(new Reload(this));
+        
+        this.getCommand("staffchat").setExecutor(new CommandStaffChat(this));
+        this.getCommand("staffc").setExecutor(new CommandStaffChat(this));
+        this.getCommand("schat").setExecutor(new CommandStaffChat(this));
+        this.getCommand("sc").setExecutor(new CommandStaffChat(this));	
 
         getServer().getPluginManager().registerEvents(new TopLuckInventoryListener(), this);
 

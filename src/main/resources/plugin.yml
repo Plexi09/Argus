@@ -31,7 +31,7 @@ commands:
 
   silentcontainer:
     description: Enables or disables SilentContainer mode.
-    aliases: [sc, silentc, silentchest]
+    aliases: [silentc, silentchest]
     permission: argus.silentcontainer
     permission-message: You do not have permission to use this command.
 
@@ -59,6 +59,12 @@ commands:
     description: Set the health of a player
     permission: argus.sethealth
     permission-message: You do not have permission to use this command.
+
+  staffchat:
+    description: Speak in the staff chat.
+    permission: argus.staffchat.speak
+    permission-message: You do not have permission to use this command.
+    aliases: [staffc, schat, sc]
 
 permissions:
   argus.reload:
@@ -107,5 +113,16 @@ permissions:
 
   argus.sethealth:
     description: Set the health of a player
+    default: op
+
+  argus.staffchat:
+    default: op
+
+  argus.staffchat.read:
+    description: Read the staff chat
+    default: op
+
+  argus.staffchat.speak:
+    description: Speak in the staff chat
     default: op
     
