@@ -73,8 +73,9 @@ public class CommandOpeninv implements CommandExecutor {
         customInventory.setItem(49, target.getInventory().getItemInOffHand());
         
         // Create the control buttons and add them to the last row
-        customInventory.setItem(45, createStatsItem(Material.COOKED_BEEF, "§aFood: " + target.getFoodLevel()));
-        customInventory.setItem(46, createStatsItem(Material.TOTEM_OF_UNDYING, "§cHealth: " + target.getHealth()));
+        customInventory.setItem(45, createStatsItem(Material.TOTEM_OF_UNDYING, "§cHealth: " + target.getHealth()));
+        customInventory.setItem(46, createStatsItem(Material.COOKED_BEEF, "§eFood: " + target.getFoodLevel()));
+        customInventory.setItem(47, createStatsItem(Material.EXPERIENCE_BOTTLE, "§aExp: " + "lvl " + target.getLevel(), "§aPoints: " + target.getExp()));
         
         customInventory.setItem(51, createControlItem(Material.STRUCTURE_VOID, "§cClear Inventory", "§7Click to clear the player's inventory."));
         customInventory.setItem(52, createControlItem(Material.DISPENSER, "§eShuffle Inventory", "§7Click to shuffle the player's inventory."));

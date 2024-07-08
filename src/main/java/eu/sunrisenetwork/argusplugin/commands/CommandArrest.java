@@ -98,7 +98,6 @@ public class CommandArrest implements CommandExecutor, Listener {
 
         ItemStack barrier = new ItemStack(Material.BARRIER);
         ItemMeta meta = barrier.getItemMeta();
-        meta.setDisplayName(ChatColor.RED + "You cannot take this item!");
         barrier.setItemMeta(meta);
 
         for (int i = 0; i < 9; i++) {
