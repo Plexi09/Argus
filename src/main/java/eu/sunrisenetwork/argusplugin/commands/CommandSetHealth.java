@@ -23,7 +23,7 @@ public class CommandSetHealth implements CommandExecutor {
         try {
         	health = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-        	MessageUtils.sendMessage(sender, "The second argument must be an integer.");
+        	MessageUtils.sendErrorMessage(sender, "The second argument must be an integer.");
             return false;
         }
 
@@ -34,7 +34,7 @@ public class CommandSetHealth implements CommandExecutor {
         }
 
         if (health > target.getMaxHealth()) {
-            MessageUtils.sendMessage(sender, "You tried to set the health of " + target.getName() + " to " + health + " but its max health is " + target.getMaxHealth() + ". Try running /setmaxhealth " + target.getName() + " " + health + " and run the command again.");
+            MessageUtils.sendErrorMessage(sender, "You tried to set the health of " + target.getName() + " to " + health + " but its max health is " + target.getMaxHealth() + ". Try running /setmaxhealth " + target.getName() + " " + health + " and run the command again.");
             return false;
         }
 
