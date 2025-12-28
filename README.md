@@ -1,6 +1,6 @@
 # Argus Plugin
 
-*Moderator Utilities for the Sunrise Network*
+*Moderator Utilities for the Sunrise Network. As of December 28th 2025 the project is no longer maintained. Developpement may resume at some point in the future.*
 
 ---
 
